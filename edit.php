@@ -6,8 +6,13 @@ if (!isset($_SESSION['loged']) || $_SESSION['loged'] !== true) {
     die(header('location: login.php'));
 }
 $stt = $_GET['id'];
+$id = (int)$_SESSION['id'];
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $task = get_task_by_stt($stt, $conn)['task'];
+    $row = get_task_by_stt($stt, $conn);
+    if ($row['id'] !== $id) {
+        die('khong có quyền');
+    }
+    $task = $row['task'];
 } else {
     if (isset($_POST['submit'])) {
         $update_task = $_POST['mission'];
