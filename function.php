@@ -59,7 +59,7 @@ function edit_list($update, $stt, $conn)
 
 function get_task_by_stt($stt, $conn)
 {
-    $query = 'select task from to_do_list where stt=?';
+    $query = 'select * from to_do_list where stt=?';
     $exec = $conn->prepare($query);
     $exec->bind_param('i', $stt);
     $exec->execute();
